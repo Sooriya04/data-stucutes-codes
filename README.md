@@ -3,9 +3,9 @@
 <h3>On GitHub, you'll find a variety of projects showcasing my work, from simple web apps to more complex systems. I'm always eager to learn and collaborate, so feel free to explore my repositories and reach out if you have any questions or ideas!</h3>
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=sooriya04&label=Profile%20views&color=0e75b6&style=flat" alt="sooriya04" /> </p>
 
-- 🔭 I’m currently working on **Aid connects** <br>
+<!--- 🔭 I’m currently working on **Aid connects** <br>-->
 
-- 🌱 I’m currently learning **Express**<br>
+- 🌱 I’m currently learning **Data Structures**<br>
 
 - 💬 Ask me about **Web Development**<br>
 
