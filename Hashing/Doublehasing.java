@@ -1,7 +1,5 @@
 package Hashing;
-
 import java.util.Scanner;
-
 public class Doublehasing {
     int[] table;
     int size;
