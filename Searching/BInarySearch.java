@@ -2,7 +2,7 @@ class binarySearch{
     public int search(int A[], int n, int key){
         int left = 0;
         int right = n - 1;
-        while (left <= right){ //0 < 4
+        while (left <= right){ //0 < 5
             int mid = (left + right) / 2; //2
             //System.out.println(mid);
             if (key == A[mid]) 
