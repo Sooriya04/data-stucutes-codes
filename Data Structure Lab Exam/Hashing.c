@@ -1,68 +1,70 @@
 #include <stdio.h>
-
-#define SIZE 10  
 #define EMPTY -1
 #define DELETED -2
-int hashTable[SIZE];
-
+#define MAX_SIZE 100
+int hashTable[MAX_SIZE];
+int size;
 void initializeTable() {
-    for (int i = 0; i < SIZE; i++) {
-        hashTable[i] = EMPTY;
-    }
+    printf("Enter the size of the table (max %d): ", MAX_SIZE);
+    scanf("%d", &size);
+
+    if (size > MAX_SIZE) size = MAX_SIZE;
+
+    for (int i = 0; i < size; i++) hashTable[i] = EMPTY;
 }
 
 int hashFunction(int key) {
-    return key % SIZE;
+    return key % size;
 }
 
 void insert(int key) {
     int index = hashFunction(key);
-    while (hashTable[index] != EMPTY) {
-        index = (index + 1) % SIZE;
+    for (int i = 0; i < size; i++) {
+        if (hashTable[index] == EMPTY || hashTable[index] == DELETED) {
+            hashTable[index] = key;
+            printf("Inserted %d at index %d\n", key, index);
+            return;
+        }
+        index = (index + 1) % size;
     }
-
-    hashTable[index] = key;
-    printf("Inserted %d at index %d\n", key, index);
+    printf("Hash table is full. Cannot insert %d.\n", key);
 }
 
 void search(int key) {
     int index = hashFunction(key);
-    int startIndex = index;
-    while (hashTable[index] != EMPTY) {
+
+    for (int i = 0; i < size; i++) {
+        if (hashTable[index] == EMPTY) break;
         if (hashTable[index] == key) {
             printf("Found %d at index %d\n", key, index);
             return;
         }
-        index = (index + 1) % SIZE;
-        if (index == startIndex) {
-            break;
-        }
+        index = (index + 1) % size;
     }
     printf("%d not found in the hash table\n", key);
 }
 
 void delete(int key) {
     int index = hashFunction(key);
-    int startIndex = index;
-    while (hashTable[index] != EMPTY) {
+    for (int i = 0; i < size; i++) {
+        if (hashTable[index] == EMPTY) break;
         if (hashTable[index] == key) {
-            hashTable[index] = EMPTY;
+            hashTable[index] = DELETED;
             printf("Deleted %d from index %d\n", key, index);
             return;
         }
-        index = (index + 1) % SIZE;
-        if (index == startIndex) {
-            break;
-        }
+        index = (index + 1) % size;
     }
     printf("%d not found in the hash table to delete\n", key);
 }
 
 void displayTable() {
     printf("Hash Table:\n");
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < size; i++) {
         if (hashTable[i] == EMPTY)
             printf("[%d]: Empty\n", i);
+        else if (hashTable[i] == DELETED)
+            printf("[%d]: Deleted\n", i);
         else
             printf("[%d]: %d\n", i, hashTable[i]);
     }
@@ -70,6 +72,7 @@ void displayTable() {
 
 int main() {
     int choice, key;
+
     initializeTable();
     do {
         printf("\n1. Insert\n2. Search\n3. Delete\n4. Display\n5. Exit\nEnter your choice: ");
